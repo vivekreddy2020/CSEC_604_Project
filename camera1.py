@@ -10,6 +10,7 @@ fps = int(rgb.get(cv2.CAP_PROP_FPS))
 facec = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 cnn = FaceKeypointsCaptureModel("face_model.json", "face_model.h5")
 feature = ''
+
 def __get_data__():
     _, fr = rgb.read()
     gray = cv2.cvtColor(fr, cv2.COLOR_BGR2GRAY)

@@ -1,11 +1,12 @@
+import binascii
 import hashlib
-import base64
-from Crypto import Random
 from Crypto.Cipher import AES
-print(AES.block_size)
-key = hashlib.sha256('lol'.encode('utf-8')).digest()
-x = Random.new().read(AES.block_size)
-cipher = AES.new(key, AES.MODE_CBC, x)
-print(x+cipher.encrypt('vivekkkkk'.encode()))
+from Crypto import Random
+from Crypto.Util.Padding import pad, unpad
+x = "vivekflfrmwelnlsnlwlwnclwnlwcwc"
+x = pad(bytes(x,"utf-8"),32)
 print(x)
-print(x[16:])
+y = b'mvevreveveev\x01'
+print(unpad(x,32).decode('utf-8'))
+
+

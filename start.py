@@ -1,17 +1,18 @@
 import sys
-
+import cv2
 from camera1 import start_app
+from camera1 import rgb
 from cryptic import *
 
 
-def main():
+def start():
     
     print("Options: For Encryption with facial biometrics, press 'E' \n")
     print("         For Decryption, press 'D' \n")
     put = input()
-    if input == 'E':
+    if put == 'E':
         encryption_proc()
-    if input == 'D':
+    if put == 'D':
         decryption_proc()
 
 def encryption_proc():
@@ -19,11 +20,13 @@ def encryption_proc():
     path = input()
     if check(path):
         print("File is already encrypted, returning to main menu\n")
-        main()
+        start()
     else:
-        if encrypt(start_app(), path):
+        if encrypting(start_app(), path) is True:
             print("File has been encrypted successfully!!\n")
-            main()
+            rgb.release()
+            cv2.destroyAllWindows()
+            start()
         else: 
             sys.exit("Error ouccred, Program terminated!!")
 
@@ -32,11 +35,11 @@ def decryption_proc():
     path = input()
     if check(path) == False:
         print("File is already Decrypted\n")
-        main()
+        start()
     else:
-        if decrypt(start_app(), path):
+        if decrypting(start_app(), path) is True:
             print("File has been decrypted succesfully!!, returning to main menu.\n")
-            main()
+            start()
         else:
             i = input("Decryption failed with current face id!, Do you want to try again (Y)es or (N)o\n")
             if i == 'Y':
@@ -47,4 +50,4 @@ def decryption_proc():
 
 if __name__ == '__main__':
     print("Welcome, this is a test program to check the deployment!! \n")
-    main()
+    start()

@@ -86,38 +86,13 @@ def capture(frame, pts_dict):
 
 def variance():
     pt = str(mode(eyelength))+str(mode(faceheight))+str(mode(mouthheight))+str(mode(mouthlength))
-    pt = hashlib.sha256(pt.encode('utf-8')).hexdigest()
-    print(pt)
+    pt = hashlib.md5(pt.encode('utf-8')).hexdigest()
     file = open("diagnosticsdata.txt","a")
     file.write(pt)
     file.write("\n")
     file.close()
     return pt
-    """
-    path = 'testdata.txt'
-    if cryptic.check(path):
-        print("File is already encrypted!!")
-    else: 
-        if cryptic.encrypt(pt,path):
-            print("File is encrypted!!")
-        
-    accur=[]
-    count=0
-    file1 = open("diagnosticsdata.txt","r")
-    #for i in file1.readline():
-    while True:
-
-    data = file1.readline()
-    accur.append(file1.readlines())
-    file1.close()
-    temp3=mode(accur)
-    print(accur)
-    print(temp3)
-    for i in accur:
-        if temp3 is (i+"\n"):
-            count += 1
-    return ((count/len(accur))*100)
-    """
+   
 
 def mapper(x):
     l=len(str(x))
@@ -147,8 +122,7 @@ def distance2(pt1, pt2):
     p1=abs(p1-p3)
     return p1
 
-if __name__ == '__main__':
-    model = FaceKeypointsCaptureModel("face_model.json", "face_model.h5")
+
 
 
 
