@@ -10,4 +10,4 @@ Dataset on which the model is trained is avilable at kaggle over [here](https://
 7. Keras
 
 ## Usage
-Run [camera.py] to see the results
+Run [start.py] to see the results
