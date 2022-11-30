@@ -4,8 +4,10 @@ Dataset on which the model is trained is avilable at kaggle over [here](https://
 1. OpenCV
 2. Matplotlib
 3. Numpy
-4. Keras
-5. Tensorflow
+4. Tensorflow
+5. pycrypto
+6. binascii
+7. Keras
 
 ## Usage
 Run [camera.py] to see the results
