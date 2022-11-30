@@ -1,19 +1,23 @@
 import sys
-import cv2
-from camera1 import start_app
-from camera1 import rgb
+from feed import start_app
 from cryptic import *
 
 
 def start():
     
-    print("Options: For Encryption with facial biometrics, press 'E' \n")
-    print("         For Decryption, press 'D' \n")
+    print("Options: For Encryption with facial biometrics, press 'E' ")
+    print("         For Decryption, press 'D' ")
+    print("         To exit program, press 'X' ")
     put = input()
     if put == 'E':
         encryption_proc()
-    if put == 'D':
+    elif put == 'D':
         decryption_proc()
+    elif put == 'X':
+        sys.exit("Program terminated!")
+    else:
+        print("Wrong options entered. \n")
+        start()
 
 def encryption_proc():
     print("Enter File name: \n")
@@ -24,12 +28,11 @@ def encryption_proc():
     else:
         if encrypting(start_app(), path) is True:
             print("File has been encrypted successfully!!\n")
-            rgb.release()
-            cv2.destroyAllWindows()
+
             start()
         else: 
-            sys.exit("Error ouccred, Program terminated!!")
-
+            print("Error encrypting the current file format, returning to main menu.")
+            start()
 def decryption_proc():
     print("Enter File name: \n")
     path = input()

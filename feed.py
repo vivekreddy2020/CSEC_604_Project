@@ -6,25 +6,30 @@ from filter import variance
 from model import FaceKeypointsCaptureModel
 
 rgb = cv2.VideoCapture(0)
+cv2.namedWindow('Attribute Capture')
 fps = int(rgb.get(cv2.CAP_PROP_FPS))
 facec = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 cnn = FaceKeypointsCaptureModel("face_model.json", "face_model.h5")
 feature = ''
 
 def __get_data__():
-    _, fr = rgb.read()
-    gray = cv2.cvtColor(fr, cv2.COLOR_BGR2GRAY)
-    faces = facec.detectMultiScale(gray, 1.3, 5)
+    try:
+        _, fr = rgb.read()
+        gray = cv2.cvtColor(fr, cv2.COLOR_BGR2GRAY)
+        faces = facec.detectMultiScale(gray, 1.3, 5)
     
-    return faces, fr, gray
+        return faces, fr, gray
+    except:
+        sys.exit("Program terminated!!")
+        return 0
 
 
 def start_app():
   
-    width  = int(rgb.get(3)) # float
+    width  = int(rgb.get(3))
     height = int(rgb.get(4))
     flag=0
-    img1 = cv2.imread('final3.png')
+    img1 = cv2.imread('feed.png')
     img1 = cv2.resize(img1, (1024, 768))   
     while True:
         faces, fr, gray_fr = __get_data__()
@@ -45,10 +50,13 @@ def start_app():
    
         if cv2.waitKey(1)& 0xFF == ord('q'):
             flag=0
+            cv2.destroyWindow('Attribute Capture')
+            rgb.release()
+            
             feature = variance()
-            break
 
-    rgb.release()
-    cv2.destroyAllWindows()
+            break
+   
+
     return feature
     
