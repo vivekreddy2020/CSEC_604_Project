@@ -19,9 +19,17 @@ def start():
         print("Wrong options entered. \n")
         start()
 
+def exist(filepath):
+    if exists(filepath):
+        return True
+    else:
+        return False
 def encryption_proc():
     print("Enter File name: \n")
     path = input()
+    if exist(path) is False:
+        print("File doesn't exist or path is incorrect!!\n")
+        encryption_proc()
     if check(path):
         print("File is already encrypted, returning to main menu\n")
         start()
@@ -31,11 +39,14 @@ def encryption_proc():
 
             start()
         else: 
-            print("Error encrypting the current file format, returning to main menu.")
+            print("Error encrypting the current file format, returning to main menu.\n")
             start()
 def decryption_proc():
     print("Enter File name: \n")
     path = input()
+    if exist(path) is False:
+        print("File doesn't exist or path is incorrect!!\n")
+        encryption_proc()
     if check(path) == False:
         print("File is already Decrypted\n")
         start()

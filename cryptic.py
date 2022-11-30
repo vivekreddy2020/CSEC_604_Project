@@ -4,11 +4,12 @@ from Crypto import Random
 from Crypto.Cipher import AES
 import codecs
 from Crypto.Util.Padding import pad
-
+from os.path import exists
 
 unpad = lambda s: s[:-ord(s[len(s) - 1:])]
 
 def check(fpath):
+
     try:
         with open(fpath, 'rb') as data:
             fdata = data.read()
@@ -17,6 +18,7 @@ def check(fpath):
             return True
     except:
         return False
+
 
 def encrypting(key,fpath):
     iv = Random.new().read(16)
